@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 from sklearn import metrics
 import seaborn as sns
-from SurvivalPredictor import y_test, y_pred, train_original
+from SurvivalPredictor import train_original, y_test, y_pred
 
 st.title("The Machine Learning Model")
 st.write("""

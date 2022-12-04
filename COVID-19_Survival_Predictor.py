@@ -80,7 +80,7 @@ def predict():
     prediction = model.predict(X)[0]
     st.header(prediction)
 
-    if prediction == 1:
+    if prediction == 1.0:
         st.error("The patient did not survive :thumbsdown:🥶")
     else:
         st.success("The patient survived :thumbsup::fire:")

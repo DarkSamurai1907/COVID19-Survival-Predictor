@@ -49,8 +49,7 @@ covid_res = st.selectbox("What was the COVID test result of the patient?", ["Pos
 icu = st.selectbox("Was the patient admitted in the ICU?", ["Yes", "No"])
 
 def negative():
-    global intubed, pneumonia, age, pregnancy, diabetes, copd, asthma, inmsupr, hypertension, other_disease
-            , cardiovascular, obesity, renal_chronic, tobacco, contact_other_covid, covid_res, icu
+    global intubed, pneumonia, age, pregnancy, diabetes, copd, asthma, inmsupr, hypertension, other_disease, cardiovascular, obesity, renal_chronic, tobacco, contact_other_covid, covid_res, icu
     intubed = "Yes"
     pneumonia = "No"
     age = 89.00

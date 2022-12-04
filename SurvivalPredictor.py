@@ -7,6 +7,8 @@ import joblib
 train = pd.read_csv("train.csv")
 test = pd.read_csv("test.csv")
 
+train_original = train
+
 train = train.drop(train.columns[[0, 1, 2, 3, 4, 5]], axis=1)
 test = test.drop(test.columns[[0, 1, 2, 3, 4, 5]], axis=1)
 

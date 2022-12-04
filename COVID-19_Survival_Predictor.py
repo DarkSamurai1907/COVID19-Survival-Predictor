@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
-model = joblib.load("SurvivalPredictorLOGREG.joblib")
+model = joblib.load("SurvivalPredictorModel.joblib")
 
 st.set_page_config(page_title="COVID-19 Patient Survival Predictor", page_icon=":syringe:")
 

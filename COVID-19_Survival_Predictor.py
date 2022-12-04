@@ -69,8 +69,8 @@ def negative():
     icu = "Yes"
     
     
-st.write("Hint: For a negative result, click here: ")
-st.button("Negative Result", on_click=negative)    
+# st.write("Hint: For a negative result, click here: ")
+# st.button("Negative Result", on_click=negative)    
 
 
 intubed = 1 if intubed == "Yes" else 0

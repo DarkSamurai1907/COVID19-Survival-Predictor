@@ -49,7 +49,7 @@ covid_res = st.selectbox("What was the COVID test result of the patient?", ["Pos
 icu = st.selectbox("Was the patient admitted in the ICU?", ["Yes", "No"])
 
 def negative():
-#     global intubed, pneumonia, age, pregnancy, diabetes, copd, asthma, inmsupr, hypertension, other_disease, cardiovascular, obesity, renal_chronic, tobacco, contact_other_covid, covid_res, icu
+    global intubed, pneumonia, age, pregnancy, diabetes, copd, asthma, inmsupr, hypertension, other_disease, cardiovascular, obesity, renal_chronic, tobacco, contact_other_covid, covid_res, icu
     intubed = "Yes"
     pneumonia = "No"
     age = 89.00
@@ -68,6 +68,10 @@ def negative():
     covid_res = "Positive"
     icu = "Yes"
     
+    
+st.write("Hint: For a negative result, click here: ")
+st.button("Negative Result", on_click=negative)    
+
 
 intubed = 1 if intubed == "Yes" else 0
 pneumonia = 1 if pneumonia == "Yes" else 0
@@ -86,9 +90,7 @@ tobacco = 1 if tobacco == "Yes" else 0
 contact_other_covid = 1 if contact_other_covid == "Yes" else 0
 covid_res = 1 if covid_res == "Positive" else 0
 icu = 1 if icu == "Yes" else 0
-    
-st.write("Hint: For a negative result, click here: ")
-st.button("Negative Result", on_click=negative)
+   
     
 columns = ["intubed", "pneumonia", "age", 'pregnancy', 'diabetes', 'copd', 'asthma', 'inmsupr', 'hypertension',
            'other_disease', 'cardiovascular', 'obesity', 'renal_chronic', 'tobacco', 'contact_other_covid',

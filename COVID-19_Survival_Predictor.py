@@ -87,6 +87,8 @@ contact_other_covid = 1 if contact_other_covid == "Yes" else 0
 covid_res = 1 if covid_res == "Positive" else 0
 icu = 1 if icu == "Yes" else 0
     
+st.write("Hint: For a negative result, click here: ")
+st.button("Negative Result", on_click=negative)
     
 columns = ["intubed", "pneumonia", "age", 'pregnancy', 'diabetes', 'copd', 'asthma', 'inmsupr', 'hypertension',
            'other_disease', 'cardiovascular', 'obesity', 'renal_chronic', 'tobacco', 'contact_other_covid',
@@ -100,7 +102,7 @@ def predict():
     row = np.array(features)
     X = pd.DataFrame([row], columns=columns)
     prediction = model.predict(X)[0]
-    st.footer(prediction)
+    st.header(prediction)
 
     if prediction == 1.0:
         st.error("The patient did not survive :thumbsdown:🥶")
@@ -109,6 +111,4 @@ def predict():
 
 
 st.button("Predict", on_click=predict)
-st.write("Hint: For a negative result, click ")
-st.button("here", on_click=negative)
 st.caption("Made by Aniruddh")

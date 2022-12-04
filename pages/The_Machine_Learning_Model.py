@@ -1,7 +1,8 @@
+import matplotlib.pyplot as plt
 import streamlit as st
-import pandas as pd
 from sklearn import metrics
-from SurvivalPredictor import y_test, y_pred
+import seaborn as sns
+from SurvivalPredictor import train, y_test, y_pred, train_original
 
 st.title("The Machine Learning Model")
 st.write("""
@@ -11,11 +12,15 @@ st.write("""
 st.write("---")
 st.write("""
 The data was already split into train and test data.
-Here is a glimpse of the training data:
+Here is a glimpse of the raw data:
 """)
 
-train = pd.read_csv("train.csv")
-st.dataframe(train.head())
+st.write(train)
+
+st.write("This is a correlation heatmap for the training data:")
+fig, ax = plt.subplots()
+sns.heatmap(train.corr(), ax=ax)
+st.write(fig)
 st.write("""The data was cleaned by converting continuous data to categorical, eliminating extraneous features, 
             and changing dummy values to 0s and actual values to 1.""")
 
@@ -27,12 +32,9 @@ st.write("---")
 cnf_matrix = metrics.confusion_matrix(y_test, y_pred)
 
 st.write("##### Confusion Matrix:")
-st.dataframe(cnf_matrix)
+st.write(cnf_matrix)
 
 st.write("---")
 st.write("""
 The accuracy of this model is 97.23675%.
 """)
-
-
-

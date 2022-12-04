@@ -15,7 +15,7 @@ The data was already split into train and test data.
 Here is a glimpse of the raw data:
 """)
 
-st.write(train_original)
+st.write(train_original.head())
 
 st.write("This is a correlation heatmap for the training data:")
 fig, ax = plt.subplots()

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 from sklearn import metrics
 import seaborn as sns
-from SurvivalPredictor import train, y_test, y_pred, train_original
+from SurvivalPredictor import y_test, y_pred, train_original
 
 st.title("The Machine Learning Model")
 st.write("""
@@ -15,7 +15,7 @@ The data was already split into train and test data.
 Here is a glimpse of the raw data:
 """)
 
-st.write(train)
+st.write(train_original)
 
 st.write("This is a correlation heatmap for the training data:")
 fig, ax = plt.subplots()

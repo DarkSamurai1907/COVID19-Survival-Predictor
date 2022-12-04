@@ -30,6 +30,9 @@ test['date_died'] = test['date_died'].replace(date_died, '1')
 train = train.replace([97, 98, 99], 0)
 test = test.replace([97, 98, 99], 0)
 
+train = train.replace([2,1],[1,0])
+test = test.replace([2,1],[1,0])
+
 ages1 = []
 
 for i in train['age']:

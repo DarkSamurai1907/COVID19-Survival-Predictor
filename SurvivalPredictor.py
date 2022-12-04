@@ -77,4 +77,4 @@ logreg = LogisticRegression()
 logreg.fit(X, y)
 y_pred = logreg.predict(X_test)
 
-joblib.dump(logreg, "SurvivalPredictorLOGREG.joblib")
+joblib.dump(logreg, "SurvivalPredictorModel.joblib")

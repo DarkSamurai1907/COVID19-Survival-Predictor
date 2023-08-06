@@ -1,85 +1,65 @@
-import numpy as np
+# Importing Libraries 
+import random
 import pandas as pd
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+from sklearn.metrics import classification_report
 from sklearn.preprocessing import MinMaxScaler
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 import joblib
 
+
+# Reading train and test data
 train = pd.read_csv("train.csv")
 test = pd.read_csv("test.csv")
 
-train_original = train
+df = pd.concat([train,test])
 
-train = train.drop(train.columns[[0, 1, 2, 3, 4, 5]], axis=1)
-test = test.drop(test.columns[[0, 1, 2, 3, 4, 5]], axis=1)
+df = df.replace(['9999-99-99'], '0')
+df = df.replace(['9999-99-99$'], '0')
 
-train = train.replace(['9999-99-99'], '0')
-train = train.replace(['9999-99-99$'], '0')
-test = test.replace(['9999-99-99'], '0')
-test = test.replace(['9999-99-99$'], '0')
-
-date_died = train['date_died'].to_list()
+date_died = df['date_died'].to_list()
 date_died = list(set(date_died))
 date_died.pop(date_died.index('0'))
-train['date_died'] = train['date_died'].replace(date_died, '1')
+df['date_died'] = df['date_died'].replace(date_died, '1')
 
-date_died = test['date_died'].to_list()
-date_died = list(set(date_died))
-date_died.pop(date_died.index('0'))
-test['date_died'] = test['date_died'].replace(date_died, '1')
+df = df.drop(df.columns[[0,1,2,3,4,5]], axis=1)
 
-train = train.replace([97, 98, 99], 0)
-test = test.replace([97, 98, 99], 0)
+cols = ['intubed','pneumonia','pregnancy','diabetes','copd','asthma','inmsupr','hypertension','other_disease','cardiovascular','obesity','renal_chronic','tobacco','contact_other_covid']
 
-train = train.replace([2,1],[1,0])
-test = test.replace([2,1],[1,0])
+for col in cols:
+    df[col] = df[col].replace([97,98,99], 2)
 
-ages1 = []
+for col in cols:
+    df[col] = df[col].replace(2, 0)
 
-for i in train['age']:
+df['covid_res'] = df['covid_res'].replace([1,2,3], [1,0,0])
+
+ages=[]
+for i in df['age']:
     i = i[:2]
-    i = int(i)
-    ages1.append(i)
+    i=int(i)
+    ages.append(i)
+df['age'] = ages
 
-train['age'] = ages1
+scaler = MinMaxScaler()
+df['age'] = scaler.fit_transform(df[['age']]).round()
 
-ages2 = []
+#split dataset in features and target variable
+feature_cols = ['intubed','pneumonia','age','pregnancy','diabetes','copd','asthma','inmsupr','hypertension','other_disease','cardiovascular','obesity','renal_chronic','tobacco','contact_other_covid','covid_res','icu']
+X= df.drop(['date_died'],axis=1) # Features
+y = df.drop(feature_cols,axis=1) # Target variable
+y = np.ravel(y)
 
-for i in test['age']:
-    i = i[:2]
-    i = int(i)
-    ages2.append(i)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1, random_state = 42)
 
-test['age'] = ages2
+model = LogisticRegression(max_iter = 999999)
 
-scaling1 = MinMaxScaler()
-train = scaling1.fit_transform(train.to_numpy()).round()
-scaling2 = MinMaxScaler()
-test = scaling2.fit_transform(test.to_numpy()).round()
+model.fit(X_train, y_train)
 
-train = pd.DataFrame(train,
-                     columns=['date_died', 'intubed', 'pneumonia', 'age', 'pregnancy', 'diabetes', 'copd', 'asthma',
-                              'inmsupr', 'hypertension', 'other_disease', 'cardiovascular', 'obesity', 'renal_chronic',
-                              'tobacco', 'contact_other_covid', 'covid_res', 'icu'])
-test = pd.DataFrame(test,
-                    columns=['date_died', 'intubed', 'pneumonia', 'age', 'pregnancy', 'diabetes', 'copd', 'asthma',
-                             'inmsupr', 'hypertension', 'other_disease', 'cardiovascular', 'obesity', 'renal_chronic',
-                             'tobacco', 'contact_other_covid', 'covid_res', 'icu'])
+y_pred = model.predict(X_test)
 
-# Split dataset in features and target variable
-feature_cols = ['intubed', 'pneumonia', 'age', 'pregnancy', 'diabetes', 'copd', 'asthma', 'inmsupr', 'hypertension',
-                'other_disease', 'cardiovascular', 'obesity', 'renal_chronic', 'tobacco', 'contact_other_covid',
-                'covid_res', 'icu']
-X = train.drop(['date_died'], axis=1)  # Features
-y = train.drop(feature_cols, axis=1)  # Target variable
-y = np.ravel(y)  # Convert the column vector into a contiguous flattened array
-
-X_test = test.drop(['date_died'], axis=1)
-y_test = test.drop(feature_cols, axis=1)
-
-# instantiate the model (using the default parameters)
-logreg = LogisticRegression()
-# fit the model with data
-logreg.fit(X, y)
-y_pred = logreg.predict(X_test)
-
-joblib.dump(logreg, "SurvivalPredictorModel.joblib")
+joblib.dump(model, 'FinalModel.joblib')

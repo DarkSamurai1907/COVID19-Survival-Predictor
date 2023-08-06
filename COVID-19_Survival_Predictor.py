@@ -48,25 +48,25 @@ covid_res = st.selectbox("What was the COVID test result of the patient?", ["Pos
 
 icu = st.selectbox("Was the patient admitted in the ICU?", ["Yes", "No"])
 
-def negative():
-    global intubed, pneumonia, age, pregnancy, diabetes, copd, asthma, inmsupr, hypertension, other_disease, cardiovascular, obesity, renal_chronic, tobacco, contact_other_covid, covid_res, icu
-    intubed = "Yes"
-    pneumonia = "No"
-    age = 89.00
-    pregnancy = "No"
-    diabetes = "No"
-    copd = "No"
-    asthma = "Yes"
-    inmsupr = "Yes"
-    hypertension = "No"
-    other_disease = "Yes"
-    cardiovascular = "No"
-    obesity = "Yes"
-    renal_chronic = "No"
-    tobacco = "No"
-    contact_other_covid = "No" 
-    covid_res = "Positive"
-    icu = "Yes"
+# def negative():
+#     global intubed, pneumonia, age, pregnancy, diabetes, copd, asthma, inmsupr, hypertension, other_disease, cardiovascular, obesity, renal_chronic, tobacco, contact_other_covid, covid_res, icu
+#     intubed = "Yes"
+#     pneumonia = "No"
+#     age = 89.00
+#     pregnancy = "No"
+#     diabetes = "No"
+#     copd = "No"
+#     asthma = "Yes"
+#     inmsupr = "Yes"
+#     hypertension = "No"
+#     other_disease = "Yes"
+#     cardiovascular = "No"
+#     obesity = "Yes"
+#     renal_chronic = "No"
+#     tobacco = "No"
+#     contact_other_covid = "No" 
+#     covid_res = "Positive"
+#     icu = "Yes"
     
     
 # st.write("Hint: For a negative result, click here: ")

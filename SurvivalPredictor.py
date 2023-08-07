@@ -18,6 +18,8 @@ test = pd.read_csv("test.csv")
 
 df = pd.concat([train,test])
 
+df_original = df
+
 df = df.replace(['9999-99-99'], '0')
 df = df.replace(['9999-99-99$'], '0')
 
@@ -49,8 +51,6 @@ scaler = MinMaxScaler()
 df['age'] = scaler.fit_transform(df[['age']]).round()
 
 df['date_died'] = df['date_died'].astype(int)
-
-df_original = df
 
 #split dataset in features and target variable
 feature_cols = ['intubed','pneumonia','age','pregnancy','diabetes','copd','asthma','inmsupr','hypertension','other_disease','cardiovascular','obesity','renal_chronic','tobacco','contact_other_covid','covid_res','icu']

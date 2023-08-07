@@ -16,8 +16,6 @@ import joblib
 train = pd.read_csv("train.csv")
 test = pd.read_csv("test.csv")
 
-train_original = train
-
 df = pd.concat([train,test])
 
 df = df.replace(['9999-99-99'], '0')
@@ -30,7 +28,7 @@ df['date_died'] = df['date_died'].replace(date_died, '1')
 
 df = df.drop(df.columns[[0,1,2,3,4,5]], axis=1)
 
-cols = ['intubed','pneumonia','pregnancy','diabetes','copd','asthma','inmsupr','hypertension','other_disease','cardiovascular','obesity','renal_chronic','tobacco','contact_other_covid']
+cols = ['intubed','pneumonia','pregnancy','diabetes','copd','asthma','inmsupr','hypertension','other_disease','cardiovascular','obesity','renal_chronic','tobacco','contact_other_covid','icu']
 
 for col in cols:
     df[col] = df[col].replace([97,98,99], 2)
@@ -49,6 +47,10 @@ df['age'] = ages
 
 scaler = MinMaxScaler()
 df['age'] = scaler.fit_transform(df[['age']]).round()
+
+df['date_died'] = df['date_died'].astype(int)
+
+df_original = df
 
 #split dataset in features and target variable
 feature_cols = ['intubed','pneumonia','age','pregnancy','diabetes','copd','asthma','inmsupr','hypertension','other_disease','cardiovascular','obesity','renal_chronic','tobacco','contact_other_covid','covid_res','icu']

@@ -2,8 +2,11 @@ import joblib
 import pandas as pd
 import streamlit as st
 import numpy as np
+import pickle
 
-model = joblib.load("FinalModel.joblib")
+with open("FinalModel.pkl", "rb") as f:
+    model = pickle.load(f)
+
 
 st.set_page_config(page_title="COVID-19 Patient Survival Predictor", page_icon=":syringe:")
 

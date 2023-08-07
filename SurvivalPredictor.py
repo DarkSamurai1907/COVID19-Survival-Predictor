@@ -16,6 +16,8 @@ import joblib
 train = pd.read_csv("train.csv")
 test = pd.read_csv("test.csv")
 
+train_original = train
+
 df = pd.concat([train,test])
 
 df = df.replace(['9999-99-99'], '0')

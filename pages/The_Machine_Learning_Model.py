@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 from sklearn import metrics
 import seaborn as sns
-from SurvivalPredictor import train, train_original, y_test, y_pred
+from SurvivalPredictor import df, df_original, y_test, y_pred
 
 st.title("The Machine Learning Model")
 st.write("""
@@ -15,16 +15,16 @@ The data was already split into train and test data.
 Here is a glimpse of the raw data:
 """)
 
-st.write(train_original.head())
+st.write(df_original.head())
 
 st.write("This is a correlation heatmap for the training data:")
 fig, ax = plt.subplots()
-sns.heatmap(train.corr(), ax=ax)
+sns.heatmap(df.corr(), ax=ax)
 st.write(fig)
 st.write("""The data was cleaned by converting continuous data to categorical, eliminating extraneous features, 
             and changing dummy values to 0s and actual values to 1.""")
 
-st.write(train.head())
+st.write(df.head())
          
 st.write("Utilizing MinMaxScaler, the age column was scaled and transformed into categorical data. "
          "The data was split into X and y and the model was trained.")

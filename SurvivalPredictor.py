@@ -9,7 +9,7 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import joblib
+import pickle
 
 
 # Reading train and test data
@@ -66,4 +66,5 @@ model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
 
-joblib.dump(model, 'FinalModel.joblib')
+with open("FinalModel.pkl", "wb") as f:
+    pickle.dump(model, f)

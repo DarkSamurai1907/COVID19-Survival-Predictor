@@ -39,14 +39,14 @@ st.write(cnf_matrix)
 st.write("""
          From the above Confusion Matrix we can see that
 
-         True Positive: 163037
-         False Positive: 2302
-         True Negative: 3780
-         False Negative: 862
+         True Positive: 52286
+         False Positive: 701
+         True Negative: 2736
+         False Negative: 938
          """)
 
 
 st.write("---")
 st.write("""
-The accuracy of this model is 97.23675%.
+The accuracy of this model is 93.9341%.
 """)
